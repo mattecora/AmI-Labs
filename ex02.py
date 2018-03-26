@@ -9,9 +9,12 @@ except IndexError:
     print("No file provided on the command line!")
     exit()
 
-with open(filename, "r") as f:
-    for line in f:
-        tasks.append(line[:-1])
+try:
+    with open(filename, "r") as f:
+        for line in f:
+            tasks.append(line[:-1])
+except FileNotFoundError:
+    print("The provided file does not exist. No task will be imported.")
 
 while True:
     print("Insert the number corresponding to the action you want to perform:")
