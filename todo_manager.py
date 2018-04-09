@@ -1,6 +1,7 @@
 """ Todo manager API """
 
 tasks = []
+filename = "task_list.txt"
 
 def list_tasks():
     return sorted(tasks)
@@ -25,3 +26,18 @@ def del_all_tasks(sub):
             tasks.remove(task)
     
     return removed
+
+def read_tasks():
+    try:
+        with open(filename, "r") as f:
+            for line in f:
+                tasks.append(line[:-1])
+        return True
+    except FileNotFoundError:
+        return False
+
+def write_tasks():
+    with open(filename, "w") as f:
+        for task in sorted(tasks):
+            f.write(task + "\n")
+    return True

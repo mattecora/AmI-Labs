@@ -1,5 +1,5 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler
-from todo_manager import list_tasks, ins_task, del_task, del_all_tasks
+from todo_manager import list_tasks, ins_task, del_task, del_all_tasks, read_tasks, write_tasks
 
 my_token = ""
 
@@ -56,6 +56,9 @@ def main():
     updater = Updater(my_token)
     print("Your token is: {}".format(my_token))
 
+    # Tasks reading
+    read_tasks()
+
     # Registering handlers
     updater.dispatcher.add_handler(CommandHandler("start", start_handler))
     updater.dispatcher.add_handler(CommandHandler("showTasks", show_handler))
@@ -68,6 +71,9 @@ def main():
     print("Bot started: {}".format(updater.bot.username))
     updater.idle()
 
+    # Tasks writing
+    write_tasks()
+    print("Bot stopped.")
 
 if __name__ == "__main__":
     main()
