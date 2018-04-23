@@ -12,7 +12,8 @@ def index():
 def insert_task():
     global tasks
     new_task = request.form["new_task"]
-    ins_task(new_task)
+    urgent = "urgent" in request.form
+    ins_task(new_task, urgent)
     tasks = list_tasks()
     return redirect("/")
 

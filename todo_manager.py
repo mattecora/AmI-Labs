@@ -18,15 +18,16 @@ def list_tasks():
     for row in cur.execute(query).fetchall():
         tasks.append({
             "id": row[0],
-            "todo": row[1]
+            "todo": row[1],
+            "urgent": bool(row[2])
         })
     
     return tasks
 
-def ins_task(new_task):
+def ins_task(new_task, urgent):
     # Perform insertion
-    query = "INSERT INTO tasks(todo) VALUES (?)"
-    cur.execute(query, (new_task, ))
+    query = "INSERT INTO tasks(todo, urgent) VALUES (?, ?)"
+    cur.execute(query, (new_task, int(urgent)))
     return True
 
 def del_task(task_id):
