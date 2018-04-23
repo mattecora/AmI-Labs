@@ -1,12 +1,28 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect
+from todo_manager import close_db, list_tasks, ins_task, del_task
 
 app = Flask(__name__)
+tasks = list_tasks()
 
+@app.route("/")
+def index():
+    return render_template("tasks.html", tasks=tasks)
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route("/insert_task", methods=["POST"])
+def insert_task():
+    global tasks
+    new_task = request.form["new_task"]
+    ins_task(new_task)
+    tasks = list_tasks()
+    return redirect("/")
 
+@app.route("/delete_task/<int:task_id>")
+def delete_task(task_id):
+    global tasks
+    del_task(task_id)
+    tasks = list_tasks()
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run()
+    # close_db()
