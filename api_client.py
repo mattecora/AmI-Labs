@@ -14,6 +14,8 @@ def list_tasks():
         print("Inserted tasks:")
         for task in req.json():
             pretty_print_task(task)
+    else:
+        print("Server returned a {} error.".format(req.status_code))
 
 def add_task():
     todo = input("Insert the new task: ")
