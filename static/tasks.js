@@ -16,19 +16,15 @@ function updateList() {
     $.getJSON("http://127.0.0.1:5000/tasks", function(data) {
         for (var i = 0; i< data.length ; i++) {
             var t = data[i];
-            if (t.urgent) {
-                $("#tasklist ul").append("<li class=\"list-group-item text-danger\" data-urgent=\"true\"> " +
-                                        "<span class=\"task-todo\">" + t.todo + "</span> " +
-                                        "<button class=\"btn btn-primary btn-upd-task\" data-task=\"" + t.id + "\">Update</button> " +
-                                        "<button class=\"btn btn-danger btn-del-task\" data-task=\"" + t.id + "\">Delete</button> " +
-                                        "</li>");
-            } else {
-                $("#tasklist ul").append("<li class=\"list-group-item\" data-urgent=\"false\"> " +
-                                        "<span class=\"task-todo\">" + t.todo + "</span> " +
-                                        "<button class=\"btn btn-primary btn-upd-task\" data-task=\"" + t.id + "\">Update</button> " +
-                                        "<button class=\"btn btn-danger btn-del-task\" data-task=\"" + t.id + "\">Delete</button> " +
-                                        "</li>");
-            }
+            $("#tasklist ul").append(
+                "<li class=\"list-group-item " +
+                (t.urgent ? "text-danger" : "") +
+                " clearfix\" data-urgent=\"true\"> " +
+                "<span class=\"task-todo\" style=\"line-height: 30px;\">" + t.todo + "</span> " +
+                "<button class=\"btn btn-primary btn-upd-task pull-right\" data-task=\"" + t.id + "\">Update</button> " +
+                "<button class=\"btn btn-danger btn-del-task pull-right\" data-task=\"" + t.id + "\">Delete</button> " +
+                "</li>"
+            );
         }
 
         /* Initialize update and delete handlers */

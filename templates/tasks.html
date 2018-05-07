@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="container text-center">
-    <h1>Task list</h1>
+<div class="container">
+    <h1 class="text-center">Task list</h1>
 
     <!-- The div to store the tasks list. It will be populated dynamically, by Javascript -->
     <div id="tasklist"></div>
 
     <!-- The div to store the form to insert/update a specific task -->
-    <div id="inserttask">
+    <div class="text-center" id="inserttask">
         <form id="addForm" method="POST" class="form-inline">
             Task:
             <input type="text" id="taskDescription" class="form-control" name="description" style="display: inline;" />
